@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Now – OrganicHub</title>
+  <link rel="stylesheet" href="order.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <section class="order-section">
+    <div class="order-container">
+      <h2>Place Your Order</h2>
+      <p>Get your fresh, organic cold-pressed Sarso Ka Tel delivered to your doorstep!</p>
+
+      <form class="order-form">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Your Name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="9876543210" required>
+
+        <label for="address">Shipping Address</label>
+        <textarea id="address" rows="4" placeholder="Your full address" required></textarea>
+
+        <label for="quantity">Quantity (in Liters)</label>
+        <select id="quantity" required>
+          <option value="">Select</option>
+          <option value="1">1 Litre – ₹299</option>
+          <option value="2">2 Litres – ₹569</option>
+          <option value="5">5 Litres – ₹1299</option>
+        </select>
+
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </section>
+
+</body>
+
+</html>

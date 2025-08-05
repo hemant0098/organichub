@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OrganicHub – Sarso Ka Tel</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar">
+    <div class="logo">OrganicHub</div>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Home</a></li>
+      <li><a href="#benefits">Benefits</a></li>
+      <li><a href="order.html">Order Now</a></li>
+
+    </ul>
+  </nav>
+
+  <!-- ✅ Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Organic Cold-Pressed Sarso Ka Tel</h1>
+      <p>Rich in nutrients. Farm fresh. Pure health in a bottle.</p>
+      <a href="order.html" class="cta-btn">Buy Now</a>
+    </div>
+    <div class="hero-img">
+      <img src="images/sarso-tel-bottle.png" alt="Sarso Bottle" />
+    </div>
+  </section>
+
+  <!-- ✅ Benefits Section -->
+  <section id="benefits" class="benefits">
+    <h2>Why Choose Our Sarso Oil?</h2>
+    <div class="benefit-grid">
+      <div class="benefit-card">
+        <img src="images/sarso-tel-bottle.png" alt="Pure" />
+        <h3>100% Pure & Organic</h3>
+        <p>No additives, no chemicals – just farm-fresh mustard oil.</p>
+      </div>
+      <div class="benefit-card">
+        <img src="images/sarso-tel-bottle.png" alt="Healthy" />
+        <h3>Heart Healthy</h3>
+        <p>Boosts immunity and promotes cardiovascular health.</p>
+      </div>
+      <div class="benefit-card">
+        <img src="images/sarso-tel-bottle.png" alt="Cold Pressed" />
+        <h3>Cold Pressed</h3>
+        <p>Retains nutrients, aroma, and flavor using traditional methods.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Footer -->
+  <footer class="footer">
+    <div class="wave"></div>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>ORGANICHUB</h2>
+        <p>Pure. Natural. Honest.<br>Cold-pressed organic mustard oil for your health and wellness.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#">Home</a>
+        <a href="#">Shop</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <div class="footer-newsletter">
+        <h4>Stay Connected</h4>
+        <input type="email" placeholder="Your Email" />
+        <button>Subscribe</button>
+        <div class="footer-socials">
+          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Insta" /></a>
+          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" /></a>
+          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Facebook" /></a>
+        </div>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2025 ORGANICHUB. All rights reserved.</p>
+  </footer>
+
+  <!-- ✅ Navbar Toggle Script -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+</body>
+
+</html>
