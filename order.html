@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Now – OrganicHub</title>
+  <link rel="stylesheet" href="order.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <section class="order-section">
+    <div class="order-container">
+      <h2>Place Your Order</h2>
+      <p>Get your fresh, organic cold-pressed Sarso Ka Tel delivered to your doorstep!</p>
+
+      <form class="order-form" id="orderForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Your Name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="9876543210" required>
+
+        <label for="address">Shipping Address</label>
+        <textarea id="address" rows="4" placeholder="Your full address" required></textarea>
+
+        <label for="quantity">Quantity (in Liters)</label>
+        <select id="quantity" required>
+          <option value="">Select</option>
+          <option value="1">1 Litre – ₹899</option>
+          <!-- Add more options if needed -->
+        </select>
+
+        <p id="totalAmount">Total Amount: ₹0</p>
+
+        <button type="submit">Pay Online</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Razorpay Checkout script -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init("Rxi5T9qYDlkXTD4zc"); // Your EmailJS Public Key
+  </script>
+
+  <!-- Confirmation popup -->
+  <div id="confirmationPopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:#fff; padding:20px; border:2px solid green; border-radius:10px; text-align:center; z-index:1000;">
+    <h3>Payment Successful ✅</h3>
+    <p id="popupMessage"></p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+
+  <script>
+    const quantity = document.getElementById('quantity');
+    const totalAmount = document.getElementById('totalAmount');
+    const orderForm = document.getElementById('orderForm');
+    const popup = document.getElementById('confirmationPopup');
+    const popupMessage = document.getElementById('popupMessage');
+
+    function updateTotal() {
+      const qty = parseInt(quantity.value) || 0;
+      const basePrice = qty * 899;
+      totalAmount.innerText = `Total Amount: ₹${basePrice}`;
+    }
+
+    quantity.addEventListener('change', updateTotal);
+
+    function closePopup() {
+      popup.style.display = 'none';
+    }
+
+    orderForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const amount = parseInt(quantity.value) * 899 * 100; // in paise
+
+      const options = {
+        key: 'rzp_test_8FTtXehVJeDC5b', // Your Razorpay Key ID
+        amount: amount,
+        currency: 'INR',
+        name: 'OrganicHub',
+        description: 'Sarso Ka Tel',
+        handler: function(response) {
+          popupMessage.innerText = 'Your payment was successful! Payment ID: ' + response.razorpay_payment_id;
+          popup.style.display = 'block';
+          
+          totalAmount.innerText = `Total Amount: ₹0`;
+
+          // Send email confirmation
+          emailjs.send("service_b8nc5kf","template_rlvkcpv",{
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            address: document.getElementById('address').value,
+            quantity: document.getElementById('quantity').value,
+            payment_id: response.razorpay_payment_id,
+            time: new Date().toLocaleString()
+          }).then(function(res){
+            console.log("Email sent successfully!", res.status, res.text);
+            orderForm.reset();
+            window.location.href = "index.html";
+          }, function(err){
+            console.error("Failed to send email", err);
+          });
+        },
+        prefill: {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          contact: document.getElementById('phone').value
+        },
+        theme: { color: '#28a745' }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    });
+  </script>
+
+</body>
+</html>
